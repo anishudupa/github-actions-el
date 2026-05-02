@@ -1,0 +1,36 @@
+name: Run multiple scripts and program
+
+on: [push]
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Setup jdk
+        uses: actions/setup-java@v5
+        with:
+          distribution: "temurin"
+          java-version: "25"
+
+      - name: Run node js script
+        run: node ./script.js
+
+      - name: Run python script
+        run: python3 ./script_py.py
+
+      - name: Run java file
+        run: |
+          javac ./Hello.java
+          java ./Hello.java
